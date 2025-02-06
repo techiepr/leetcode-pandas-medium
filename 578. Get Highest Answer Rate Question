@@ -1,0 +1,5 @@
+import pandas as pd
+
+def get_the_question(survey_log: pd.DataFrame) -> pd.DataFrame:
+    df = survey_log.groupby('question_id', as_index=False).agg(answerrate=('action', lambda x: (x == 'answer').sum()/(x == 'show').sum()))
+    return df.sort_values(by=['answerrate', 'question_id'], ascending=[False,True]).head(1).rename(columns={'question_id':'survey_log'})[['survey_log']]
