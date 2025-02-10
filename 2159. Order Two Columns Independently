@@ -1,0 +1,9 @@
+import pandas as pd
+
+def order_two_columns(data: pd.DataFrame) -> pd.DataFrame:
+    df1 = data.sort_values(by='first_col', ascending=True).reset_index(drop=True)
+    df2 = data.sort_values(by='second_col', ascending=False).reset_index(drop=True)
+
+    # Combine both sorted columns into a new DataFrame
+    result = pd.DataFrame({'first_col': df1['first_col'], 'second_col': df2['second_col']})
+    return result
